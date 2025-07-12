@@ -674,14 +674,14 @@ class _DetailsPageState extends State<DetailsPage> {
 
                   //Değerlendirme Özeti ve yorum yazıları
                   SizedBox(
-                    height: height * 0.23,
+                    height: 220,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
                         RateSum(height: height, name: widget.name),
                         CommentWidget(),
                       ],
-                    ),
+                    ), 
                   ),
                 ],
               ),
@@ -788,6 +788,7 @@ class CommentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.3,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
         borderRadius: BorderRadius.circular(10),

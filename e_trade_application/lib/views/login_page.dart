@@ -1,3 +1,4 @@
+import 'package:e_trade_application/views/bottomnavbar.dart';
 import 'package:e_trade_application/views/homepage/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -211,10 +212,10 @@ class _LoginPageState extends State<LoginPage> {
 
                               print("Kullanıcı adı: $ePosta - Şifre: $sifre");
 
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HomePage(),
+                                  builder: (context) => Bottomnavbar(),
                                 ),
                               );
                             }
