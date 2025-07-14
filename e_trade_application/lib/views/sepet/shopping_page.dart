@@ -95,7 +95,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
 
               //Sepetim listesi
               Container(
-                constraints: BoxConstraints(minHeight: 300),
+                constraints: BoxConstraints(minHeight: 270, maxHeight: 280),
                 height: MediaQuery.of(context).size.height * 0.3,
                 color: Colors.white,
                 child: Column(
@@ -195,7 +195,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            // splashRadius: 100, Animasyonla alakalıymış arak kutunun yuvarlaklığüını bu belirlemez
+                            // splashRadius: 100, Animasyonla alakalıymış arkadaki kutunun yuvarlaklığüını bu belirlemez
                             value: isCheckbox,
                             onChanged: (gelenValue) {
                               isCheckbox = gelenValue!;
@@ -257,8 +257,12 @@ class _ShoppingPageState extends State<ShoppingPage> {
 
                         Expanded(
                           child: Container(
-                            constraints: BoxConstraints(minHeight: 140),
-                            height: MediaQuery.of(context).size.height * 0.15,
+                            constraints: BoxConstraints(
+                              minHeight: 80,
+                              maxHeight: 100,
+                            ),
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            // color: Colors.red,
                             child: Column(
                               mainAxisSize:
                                   MainAxisSize
@@ -281,8 +285,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
                                 ), // Yazıyla kutu arasında az bir boşluk bırakır
                                 //kartsız ve karta taksit yapılmaz yazısı
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       height: 20,
@@ -333,7 +335,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(width: 4),
+                                    SizedBox(width: 10),
                                     Container(
                                       height: 20,
                                       decoration: BoxDecoration(
@@ -374,9 +376,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       ],
                     ),
                     //Kazancımı gör yazısı ve fiyat kısmı
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -509,7 +511,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
               SizedBox(height: 10),
               //Beğendiklerim yazısı
               Container(
-                height: 420,
+                height: MediaQuery.of(context).size.height * 0.45,
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -548,7 +550,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       ),
                       SizedBox(height: 10),
                       SizedBox(
-                        height: 360,
+                        height: MediaQuery.of(context).size.height * 0.39,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -565,7 +567,12 @@ class _ShoppingPageState extends State<ShoppingPage> {
                             //     ],
                             //   ),
                             // ),
-                            FavoriteSaleCardWidget(information: c1, percent: 9),
+                            Card(
+                              child: FavoriteSaleCardWidget(
+                                information: c1,
+                                percent: 9,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -573,6 +580,8 @@ class _ShoppingPageState extends State<ShoppingPage> {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              Container(),
             ],
           ),
         ),
