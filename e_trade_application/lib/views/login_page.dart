@@ -16,6 +16,22 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController tfEposta = TextEditingController();
   TextEditingController tfSifre = TextEditingController();
   var formKeySecond = GlobalKey<FormState>();
+
+  late TextEditingController tfUyeOl;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tfUyeOl = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    tfUyeOl.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Column(
                                   children: [
                                     Form(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
                                       key: formkey,
                                       child: Column(
                                         children: [
@@ -83,6 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                                               vertical: 10,
                                             ),
                                             child: TextFormField(
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
                                               controller: tfEposta,
                                               cursorColor: Colors.black,
                                               decoration: InputDecoration(
@@ -130,6 +150,12 @@ class _LoginPageState extends State<LoginPage> {
                                                 if (!tfEposta.contains("@")) {
                                                   return "Lütfen e postanızı doğru giriniz";
                                                 }
+                                                if (!tfEposta.contains(
+                                                  ".com",
+                                                )) {
+                                                  return "Lütfen e posta adresinizi kontrol ediniz";
+                                                }
+
                                                 return null;
                                               },
                                             ),
@@ -337,6 +363,8 @@ class _LoginPageState extends State<LoginPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Form(
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     key: formKeySecond,
                                     child: Column(
                                       children: [
@@ -346,6 +374,9 @@ class _LoginPageState extends State<LoginPage> {
                                             vertical: 20,
                                           ),
                                           child: TextFormField(
+                                            keyboardType:
+                                                TextInputType.emailAddress,
+                                            controller: tfUyeOl,
                                             decoration: InputDecoration(
                                               hintText:
                                                   "E-posta adresi veya GSM numarası",
@@ -365,6 +396,18 @@ class _LoginPageState extends State<LoginPage> {
                                                 ),
                                               ),
                                             ),
+                                            validator: (tfUyeOl) {
+                                              if (tfUyeOl!.isEmpty) {
+                                                return "E posta boş bırakılamaz";
+                                              }
+                                              if (!tfUyeOl.contains("@")) {
+                                                return "Lütfen e postanızı doğru giriniz";
+                                              }
+                                              if (!tfUyeOl.contains(".com")) {
+                                                return "Lütfen E-postanızı kontrol ediniz";
+                                              }
+                                              return null;
+                                            },
                                           ),
                                         ),
 
