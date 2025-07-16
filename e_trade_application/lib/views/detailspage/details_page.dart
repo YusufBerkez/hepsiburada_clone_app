@@ -7,6 +7,7 @@ class DetailsPage extends StatefulWidget {
   final String imgUrl;
   final int price;
   final bool visibility;
+  final bool isPhone;
 
   const DetailsPage({
     required this.name,
@@ -14,6 +15,7 @@ class DetailsPage extends StatefulWidget {
     required this.description,
     required this.price,
     required this.visibility,
+    required this.isPhone,
   });
 
   @override
@@ -230,46 +232,52 @@ class _DetailsPageState extends State<DetailsPage> {
                   Divider(),
 
                   //Kapasite telefonlar için
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Kapasite: ",
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                  Visibility(
+                    visible: widget.isPhone,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Kapasite: ",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "512 GB",
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                          Text(
+                            "512 GB",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
                   //Kapasite Kutucuğu
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: height * 0.05,
-                          width: 60,
-                          child: Text(
-                            "512 GB",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                  Visibility(
+                    visible: widget.isPhone,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: height * 0.05,
+                            width: 60,
+                            child: Text(
+                              "512 GB",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.orange),
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.orange),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
@@ -681,7 +689,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         RateSum(height: height, name: widget.name),
                         CommentWidget(),
                       ],
-                    ), 
+                    ),
                   ),
                 ],
               ),

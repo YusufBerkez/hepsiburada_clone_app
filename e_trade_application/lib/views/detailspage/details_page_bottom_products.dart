@@ -51,7 +51,8 @@ class DetailsPageBottomProducts extends StatelessWidget {
       price: 25400,
       imageUrl:
           "https://productimages.hepsiburada.net/s/777/424-600/110000770487279.jpg/format:webp",
-          description: "Galaxy S24 Fe 256 GB 8 GB Ram (Samsung Türkiye Garantili) Grafit"
+          description: "Galaxy S24 Fe 512 GB 8 GB Ram (Samsung Türkiye Garantili) Grafit",
+          isPhone: true
     );
     CardsInformation sc7 = CardsInformation(
       name:
@@ -65,7 +66,8 @@ class DetailsPageBottomProducts extends StatelessWidget {
       price: 18999,
       imageUrl:
           "https://productimages.hepsiburada.net/s/777/424-600/110001036648010.jpg/format:webp",
-          description: " 400 5G 256 GB 8 GB Ram (Honor Türkiye Garantili) Ay Grisi"
+          description: " 400 5G 512 GB 8 GB Ram (Honor Türkiye Garantili) Ay Grisi",
+          isPhone: true
     );
 
     List<CardsInformation> secondCards = [
@@ -89,6 +91,7 @@ class DetailsPageBottomProducts extends StatelessWidget {
           card: secondCards[index],
           isVisible: index % 4 == 0 ? true : false,
           visibility: index% 3 ==0 ? true: false,
+          isPhone: secondCards[index].isPhone,
         );
       },
     );

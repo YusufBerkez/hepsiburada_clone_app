@@ -277,6 +277,7 @@ class _MylistPageState extends State<MylistPage> {
                     card: products[index],
                     isVisible: false,
                     visibility: false,
+                    isPhone: products[index].isPhone,
                   );
                 },
               ),

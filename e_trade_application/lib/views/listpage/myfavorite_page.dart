@@ -96,7 +96,7 @@ class _MyfavoritePageState extends State<MyfavoritePage> {
             SizedBox(width: 5),
             Text("0", style: TextStyle(fontSize: 15)),
             Spacer(),
-            Text("1 Ürün", style: TextStyle(fontSize: 15)),
+            Text("${allCards.length} Ürün", style: TextStyle(fontSize: 15)),
           ],
         ),
         // bottom: PreferredSize(
@@ -307,19 +307,28 @@ class _MyfavoritePageState extends State<MyfavoritePage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              FavoriteAdCardWidget(
-                                information: adsCards[0],
-                                taksit: 9,
+                              Card(
+                                color: Colors.white,
+                                child: FavoriteAdCardWidget(
+                                  information: adsCards[0],
+                                  taksit: 9,
+                                ),
                               ),
                               SizedBox(width: 10),
-                              FavoriteAdCardWidget(
-                                information: adsCards[1],
-                                taksit: 3,
+                              Card(
+                                color: Colors.white,
+                                child: FavoriteAdCardWidget(
+                                  information: adsCards[1],
+                                  taksit: 3,
+                                ),
                               ),
                               SizedBox(width: 10),
-                              FavoriteAdCardWidget(
-                                information: adsCards[2],
-                                taksit: 3,
+                              Card(
+                                color: Colors.white,
+                                child: FavoriteAdCardWidget(
+                                  information: adsCards[2],
+                                  taksit: 3,
+                                ),
                               ),
                             ],
                           ),
@@ -392,6 +401,7 @@ class _FavoriteAdCardWidgetState extends State<FavoriteAdCardWidget> {
                   description: widget.information.description,
                   price: widget.information.price.toInt(),
                   visibility: false,
+                  isPhone: widget.information.isPhone,
                 ),
           ),
         );
@@ -636,6 +646,7 @@ class _FavoriteSaleCardWidgetState extends State<FavoriteSaleCardWidget> {
                   description: widget.information.description,
                   price: widget.information.price.toInt(),
                   visibility: false,
+                  isPhone: widget.information.isPhone,
                 ),
           ),
         );

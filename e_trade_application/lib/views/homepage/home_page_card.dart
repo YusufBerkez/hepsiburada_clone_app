@@ -6,10 +6,12 @@ class HomePageCard extends StatefulWidget {
   final bool isVisible;
   final bool visibility;
   final CardsInformation card;
+  final bool isPhone;
   const HomePageCard({
     required this.card,
     required this.isVisible,
     required this.visibility,
+    required this.isPhone
   });
 
   @override
@@ -33,6 +35,7 @@ class _HomePageCardState extends State<HomePageCard> {
                   description: widget.card.description,
                   price: widget.card.price.toInt(),
                   visibility: widget.visibility,
+                  isPhone: widget.isPhone,
                 ),
           ),
         );

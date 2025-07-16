@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
       imageUrl:
           "https://productimages.hepsiburada.net/s/777/444-444/110000871187553.jpg/format:webp",
       description: "Note 14 Pro 12GB 512GB (Xiaomi Türkiye Garantili)",
+      isPhone: true,
     );
     CardsInformation c2 = CardsInformation(
       description: " Redmı NOTE11 Pro yenilenmiş Füme Renk 12ay garantili",
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       price: 10599,
       imageUrl:
           "https://productimages.hepsiburada.net/s/777/444-444/110000965780313.jpg/format:webp",
+      isPhone: true,
     );
     CardsInformation c3 = CardsInformation(
       name: "Redmi ",
@@ -33,6 +35,7 @@ class _HomePageState extends State<HomePage> {
       price: 16149,
       imageUrl:
           "https://productimages.hepsiburada.net/s/777/444-444/110000870880369.jpg/format:webp",
+      isPhone: true,
     );
 
     CardsInformation c4 = CardsInformation(
@@ -41,6 +44,7 @@ class _HomePageState extends State<HomePage> {
       price: 38299,
       imageUrl:
           "https://productimages.hepsiburada.net/s/538/200-200/110000596687267.jpg/format:webp",
+      isPhone: true,
     );
     CardsInformation c5 = CardsInformation(
       name: "Grundig ",
@@ -60,6 +64,7 @@ class _HomePageState extends State<HomePage> {
     List<CardsInformation> cards = [c1, c2, c4, c3, c6, c5];
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Row(
@@ -475,6 +480,7 @@ class _HomePageState extends State<HomePage> {
                     card: cards[index],
                     isVisible: (index + 1) % 2 == 0 ? true : false,
                     visibility: (index + 1) % 3 == 0 ? true : false,
+                    isPhone: cards[index].isPhone,
                   );
                 },
               ),

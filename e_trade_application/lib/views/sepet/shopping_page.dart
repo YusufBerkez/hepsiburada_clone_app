@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_trade_application/models/cards_information.dart';
 import 'package:e_trade_application/views/listpage/myfavorite_page.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +19,33 @@ class _ShoppingPageState extends State<ShoppingPage> {
     imageUrl:
         "https://productimages.hepsiburada.net/s/40/222-222/10660756357170.jpg/format:webp",
   );
+
+  CardsInformation c2 = CardsInformation(
+    name: "Head&Shoulders",
+    description: " Clinical Strength Şampuan 400 ml",
+    price: 1799,
+    imageUrl:
+        "https://productimages.hepsiburada.net/s/777/200-200/110001076154376.jpg/format:webp",
+  );
+
+  CardsInformation c3 = CardsInformation(
+    name: "Roborock ",
+    description: "S8 Maxv Ultra Akıllı Robot Süpürge Beyaz",
+    price: 47999,
+    imageUrl:
+        "https://productimages.hepsiburada.net/s/777/424-600/110000668043593.jpg/format:webp",
+  );
+  CardsInformation c4 = CardsInformation(
+    name: "Fenerbahçe ",
+    description: "Lisanslı 2024/2025 Yeni Sezon Çubuklu Forma",
+    price: 2899,
+    imageUrl:
+        "https://productimages.hepsiburada.net/s/777/424-600/110000722320356.jpg/format:webp",
+  );
   bool isCheckbox = true;
   @override
   Widget build(BuildContext context) {
+    List<CardsInformation> cards = [c1, c2, c3, c4];
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       //Appbar kısmı
@@ -514,7 +540,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 height: MediaQuery.of(context).size.height * 0.45,
                 color: Colors.white,
                 child: Padding(
-                  
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
@@ -552,29 +577,32 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       SizedBox(height: 10),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.39,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            // Container(
-                            //   height: 250,
-                            //   width: 200,
-                            //   color: Colors.white,
-                            //   child: Column(
-                            //     children: [
-                            //       Image.network(
-                            //         "https://productimages.hepsiburada.net/s/40/222-222/10660756357170.jpg/format:webp",
-                            //       ),
-                            //       Text("Eğitim Vadisi Yayınları")
-                            //     ],
-                            //   ),
-                            // ),
-                            Card(
+                        child: ListView.builder(
+                          itemCount: cards.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              color: Colors.white,
                               child: FavoriteSaleCardWidget(
-                                information: c1,
-                                percent: 9,
+                                information: cards[index],
+                                percent: Random().nextInt(20) + 1,
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+
+                          // Container(
+                          //   height: 250,
+                          //   width: 200,
+                          //   color: Colors.white,
+                          //   child: Column(
+                          //     children: [
+                          //       Image.network(
+                          //         "https://productimages.hepsiburada.net/s/40/222-222/10660756357170.jpg/format:webp",
+                          //       ),
+                          //       Text("Eğitim Vadisi Yayınları")
+                          //     ],
+                          //   ),
+                          // ),
                         ),
                       ),
                     ],

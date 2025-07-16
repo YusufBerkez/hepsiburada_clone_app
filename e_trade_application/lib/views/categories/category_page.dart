@@ -101,7 +101,7 @@ class _CategoryPageState extends State<CategoryPage> {
               height: 480,
               child: GridView.extent(
                 maxCrossAxisExtent: 135,
-                mainAxisSpacing: 20,
+
                 childAspectRatio: 3 / 4.2,
 
                 children: [
