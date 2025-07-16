@@ -17,6 +17,7 @@ class HomePageCard extends StatefulWidget {
 }
 
 class _HomePageCardState extends State<HomePageCard> {
+  bool isClick = false;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -37,28 +38,48 @@ class _HomePageCardState extends State<HomePageCard> {
         );
       },
       child: Card(
-        color: Colors.white,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
 
+          //ChatGpt kısmıydı
+          // errorBuilder: (context, error, stackTrace) {
+          //   return Icon(Icons.broken_image);
+          // },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.2,
+
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade200, width: 1),
+                  border: Border.all(color: Colors.white, width: 1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Stack(
                   children: [
-                    Image.network(
-                      widget.card.imageUrl,
-                      fit: BoxFit.contain,
-                      //ChatGpt kısmıydı
-                      // errorBuilder: (context, error, stackTrace) {
-                      //   return Icon(Icons.broken_image);
-                      // },
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(5),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.network(
+                          widget.card.imageUrl,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(Icons.broken_image);
+                          },
+                        ),
+                      ),
                     ),
 
                     Visibility(
@@ -99,6 +120,31 @@ class _HomePageCardState extends State<HomePageCard> {
                         ),
                       ),
                     ),
+
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: SizedBox(
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isClick = !isClick;
+                            });
+                          },
+                          icon:
+                              isClick
+                                  ? Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 21,
+                                  )
+                                  : Icon(Icons.favorite_border, size: 20),
+                          style: IconButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            minimumSize: Size(10, 10),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -107,7 +153,30 @@ class _HomePageCardState extends State<HomePageCard> {
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
                   height: 40,
-                  child: Text(widget.card.name + widget.card.description),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      textAlign: TextAlign.start,
+                      maxLines: 2, //max satır sayısı
+                      overflow: TextOverflow.ellipsis, //taşarsa 3 nokta koyar
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: widget.card.name,
+
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.card.description,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Row(

@@ -14,7 +14,7 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -96,16 +96,10 @@ class _ListPageState extends State<ListPage> {
             dividerColor: Colors.grey,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 3,
-            tabs: [
-              Tab(text: "Beğendiklerim"),
-              Tab(text: "Listelerim"),
-              Tab(text: "Linkgelir"),
-            ],
+            tabs: [Tab(text: "Beğendiklerim"), Tab(text: "Listelerim")],
           ),
         ),
-        body: TabBarView(
-          children: [MyfavoritePage(), MylistPage(), MylinksPage()],
-        ),
+        body: TabBarView(children: [MyfavoritePage(), MylistPage()]),
       ),
     );
   }

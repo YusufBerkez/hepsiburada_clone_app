@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_trade_application/models/cards_information.dart';
 import 'package:e_trade_application/views/detailspage/details_page.dart';
 import 'package:e_trade_application/views/homepage/home_page_card.dart';
@@ -19,6 +21,28 @@ class _MyfavoritePageState extends State<MyfavoritePage> {
       price: 109,
       imageUrl:
           "https://productimages.hepsiburada.net/s/40/222-222/10660756357170.jpg/format:webp",
+    );
+    CardsInformation c2 = CardsInformation(
+      name: "Head&Shoulders",
+      description: " Clinical Strength Şampuan 400 ml",
+      price: 1799,
+      imageUrl:
+          "https://productimages.hepsiburada.net/s/777/200-200/110001076154376.jpg/format:webp",
+    );
+
+    CardsInformation c3 = CardsInformation(
+      name: "Roborock ",
+      description: "S8 Maxv Ultra Akıllı Robot Süpürge Beyaz",
+      price: 47999,
+      imageUrl:
+          "https://productimages.hepsiburada.net/s/777/424-600/110000668043593.jpg/format:webp",
+    );
+    CardsInformation c4 = CardsInformation(
+      name: "Fenerbahçe ",
+      description: "Lisanslı 2024/2025 Yeni Sezon Çubuklu Forma",
+      price: 2899,
+      imageUrl:
+          "https://productimages.hepsiburada.net/s/777/424-600/110000722320356.jpg/format:webp",
     );
     CardsInformation sc1 = CardsInformation(
       name: "Philips ",
@@ -43,7 +67,7 @@ class _MyfavoritePageState extends State<MyfavoritePage> {
       imageUrl:
           "https://productimages.hepsiburada.net/s/239/424-600/110000222620468.jpg/format:webp",
     );
-    List<CardsInformation> allCards = [c1];
+    List<CardsInformation> allCards = [c1, c2, c3, c4];
     List<CardsInformation> adsCards = [sc1, sc2, sc3];
 
     return Scaffold(
@@ -245,17 +269,19 @@ class _MyfavoritePageState extends State<MyfavoritePage> {
                 ),
               ),
               //Listview kısmı
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.39,
-                child: ListView.builder(
-                  itemCount: allCards.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return FavoriteSaleCardWidget(
-                      information: allCards[index],
-                      percent: 9,
-                    );
-                  },
+              Container(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.39,
+                  child: ListView.builder(
+                    itemCount: allCards.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return FavoriteSaleCardWidget(
+                        information: allCards[index],
+                        percent: Random().nextInt(20) + 1,
+                      );
+                    },
+                  ),
                 ),
               ),
 
@@ -595,7 +621,7 @@ class FavoriteSaleCardWidget extends StatefulWidget {
 }
 
 class _FavoriteSaleCardWidgetState extends State<FavoriteSaleCardWidget> {
-  bool isClick = false;
+  bool isClick = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -614,223 +640,233 @@ class _FavoriteSaleCardWidgetState extends State<FavoriteSaleCardWidget> {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        // height: MediaQuery.of(context).size.height * 0.43,
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                //Resim kısmı
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade200),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(5),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          // height: MediaQuery.of(context).size.height * 0.43,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  //Resim kısmı
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade200),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(5),
+                        ),
                       ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.network(
-                        widget.information.imageUrl,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.network(
+                          widget.information.imageUrl,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                //Alt container
-                Expanded(
-                  child: Container(
-                    child: SizedBox(
-                      // width: MediaQuery.of(context).size.width * 0.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: widget.information.name,
-                                          style: TextStyle(
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold,
+                  //Alt container
+                  Expanded(
+                    child: Container(
+                      child: SizedBox(
+                        // width: MediaQuery.of(context).size.width * 0.5,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: widget.information.name,
+                                            style: TextStyle(
+                                              color: Colors.black87,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        TextSpan(
-                                          text: widget.information.description,
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
+                                          TextSpan(
+                                            text:
+                                                widget.information.description,
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                //Değerlendirme yazısı
-                                Row(
-                                  children: [
-                                    SizedBox(width: 5),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.deepOrange,
-                                      size: 17,
-                                    ),
-                                    Text(
-                                      " 4,7 ",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Text(
-                                      "(32)",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          //Fiyat ve sepete ekle butonu
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.045,
-                              color: Colors.grey.shade200,
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  //Değerlendirme yazısı
+                                  Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "${(widget.information.price).toInt()} TL",
-                                            style: TextStyle(
-                                              color: Colors.grey.shade400,
-                                              fontWeight: FontWeight.bold,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              decorationColor: Colors.grey,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            "%${widget.percent}",
-                                            style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                255,
-                                                22,
-                                                134,
-                                                24,
-                                              ),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ],
+                                      SizedBox(width: 5),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.deepOrange,
+                                        size: 17,
                                       ),
-                                      Row(
-                                        children: [
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text:
-                                                      (widget
-                                                                  .information
-                                                                  .price -
-                                                              (widget
-                                                                      .information
-                                                                      .price *
-                                                                  0.01 *
-                                                                  widget
-                                                                      .percent))
-                                                          .toInt()
-                                                          .toString(),
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                      255,
-                                                      22,
-                                                      134,
-                                                      24,
-                                                    ),
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: "TL",
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                      255,
-                                                      22,
-                                                      134,
-                                                      24,
-                                                    ),
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        " 4,7 ",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Text(
+                                        "(32)",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
-                                  Icon(Icons.add_shopping_cart_outlined),
                                 ],
                               ),
                             ),
-                          ),
-                        ],
+
+                            //Fiyat ve sepete ekle butonu
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.045,
+                                color: Colors.grey.shade200,
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${(widget.information.price).toInt()} TL",
+                                              style: TextStyle(
+                                                color: Colors.grey.shade400,
+                                                fontWeight: FontWeight.bold,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                decorationColor: Colors.grey,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            Text(
+                                              "%${widget.percent}",
+                                              style: TextStyle(
+                                                color: const Color.fromARGB(
+                                                  255,
+                                                  22,
+                                                  134,
+                                                  24,
+                                                ),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        (widget
+                                                                    .information
+                                                                    .price -
+                                                                (widget
+                                                                        .information
+                                                                        .price *
+                                                                    0.01 *
+                                                                    widget
+                                                                        .percent))
+                                                            .toInt()
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                      color:
+                                                          const Color.fromARGB(
+                                                            255,
+                                                            22,
+                                                            134,
+                                                            24,
+                                                          ),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: "TL",
+                                                    style: TextStyle(
+                                                      color:
+                                                          const Color.fromARGB(
+                                                            255,
+                                                            22,
+                                                            134,
+                                                            24,
+                                                          ),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Icon(Icons.add_shopping_cart_outlined),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: SizedBox(
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isClick = !isClick;
-                    });
-                  },
-                  icon:
-                      isClick
-                          ? Icon(Icons.favorite, color: Colors.red, size: 21)
-                          : Icon(Icons.favorite_border, size: 20),
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    minimumSize: Size(10, 10),
+                ],
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: SizedBox(
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isClick = !isClick;
+                      });
+                    },
+                    icon:
+                        isClick
+                            ? Icon(Icons.favorite, color: Colors.red, size: 21)
+                            : Icon(Icons.favorite_border, size: 20),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      minimumSize: Size(10, 10),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
