@@ -1,3 +1,4 @@
+import 'package:e_trade_application/views/categories/category_page.dart';
 import 'package:e_trade_application/views/homepage/home_page.dart';
 import 'package:e_trade_application/views/listpage/list_page.dart';
 import 'package:e_trade_application/views/profile/profile_page.dart';
@@ -20,6 +21,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       ListPage(),
       ShoppingPage(),
       ProfilePage(),
+      CategoryPage(),
     ];
 
     return Scaffold(
@@ -60,6 +62,11 @@ class _BottomnavbarState extends State<Bottomnavbar> {
             icon: Icon(Icons.person_outline_outlined),
             label: "Hesabım",
             tooltip: "Hesabım",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: "Kategoriler",
+            tooltip: "Kategoriler",
           ),
         ],
       ),

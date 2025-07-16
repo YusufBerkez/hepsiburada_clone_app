@@ -1,3 +1,4 @@
+import 'package:e_trade_application/views/login_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -254,7 +255,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       side: BorderSide(color: Colors.grey.shade400),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
                   child: Stack(
                     children: [
                       Icon(Icons.logout, color: Colors.black),

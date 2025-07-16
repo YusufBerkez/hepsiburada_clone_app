@@ -15,8 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   var formkey = GlobalKey<FormState>();
   TextEditingController tfEposta = TextEditingController();
   TextEditingController tfSifre = TextEditingController();
-  List<bool> toggleDurumlari = [true, false];
-  int secilenToggleIndex = 0;
+  var formKeySecond = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,366 +26,560 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.deepOrange,
         foregroundColor: Colors.white,
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //Hepsiburada logo başlangıç
-              Container(
-                height: 100,
-                width: 200,
-                child: Image.network(
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/2560px-Hepsiburada_logo_official.svg.png",
-                ),
-              ),
+      body: DefaultTabController(
+        length: 2,
 
-              //Hepsiburada logo bitiş
-
-              //Kayıt işlemleri başlangıç
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Container(
-                  height: 450,
-                  width: 400,
-
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade200, width: 2),
-                    borderRadius: BorderRadius.circular(10),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                //Hepsiburada logo başlangıç
+                Container(
+                  height: 100,
+                  width: 200,
+                  child: Image.network(
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Hepsiburada_logo_official.svg/2560px-Hepsiburada_logo_official.svg.png",
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Form(
-                        key: formkey,
-                        child: Column(
+                ),
+
+                //Hepsiburada logo bitiş
+
+                //Kayıt işlemleri başlangıç
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Container(
+                    // height: 450,
+                    width: 400,
+
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade200, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TabBar(
+                          labelColor: Colors.black,
+                          indicatorColor: Colors.deepOrange,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          tabs: [Tab(text: "Giriş yap"), Tab(text: "Üye ol")],
+                        ),
+                        Container(
+                          height: 400,
+                          child: TabBarView(
+                            children: [
+                              //Giriş Yap
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Column(
+                                  children: [
+                                    Form(
+                                      key: formkey,
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 40.0,
+                                              vertical: 10,
+                                            ),
+                                            child: TextFormField(
+                                              controller: tfEposta,
+                                              cursorColor: Colors.black,
+                                              decoration: InputDecoration(
+                                                label: Text("E-posta adresi"),
+                                                labelStyle: TextStyle(
+                                                  color: Colors.grey,
+                                                ),
+                                                filled: true,
+                                                fillColor: Colors.grey.shade100,
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.deepOrange,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors
+                                                                .grey
+                                                                .shade100,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            10,
+                                                          ),
+                                                    ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors
+                                                                .grey
+                                                                .shade100,
+                                                      ),
+                                                    ),
+                                                focusColor: Colors.grey,
+                                              ),
+
+                                              validator: (tfEposta) {
+                                                if (tfEposta!.isEmpty) {
+                                                  return 'Lütfen e-posta adresinizi giriniz';
+                                                }
+                                                if (!tfEposta.contains("@")) {
+                                                  return "Lütfen e postanızı doğru giriniz";
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ),
+
+                                          //E posta bitiş
+
+                                          //Şifre Başlangıç
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 40.0,
+                                              vertical: 10,
+                                            ),
+                                            child: TextFormField(
+                                              controller: tfSifre,
+
+                                              cursorColor: Colors.black,
+                                              obscureText: obscureText,
+
+                                              decoration: InputDecoration(
+                                                suffixIcon: GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      obscureText =
+                                                          !obscureText;
+                                                    });
+                                                  },
+                                                  child: Icon(
+                                                    obscureText
+                                                        ? Icons
+                                                            .remove_red_eye_outlined
+                                                        : Icons
+                                                            .visibility_off_outlined,
+                                                    color: Colors.grey.shade500,
+                                                  ),
+                                                ),
+                                                label: Text("Şifre"),
+                                                labelStyle: TextStyle(
+                                                  color: Colors.grey,
+                                                ),
+                                                filled: true,
+                                                fillColor: Colors.grey.shade100,
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.deepOrange,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors
+                                                                .grey
+                                                                .shade100,
+                                                        width: 0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            10,
+                                                          ),
+                                                    ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors
+                                                                .grey
+                                                                .shade100,
+                                                      ),
+                                                    ),
+                                              ),
+
+                                              validator: (tfSifre) {
+                                                if (tfSifre!.isEmpty) {
+                                                  return "Şifre boş bırakılamaz";
+                                                }
+                                                if (tfSifre.length < 6) {
+                                                  return "Şifre en az 6 karakterli olmalı";
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    //E posta başlangıç
+
+                                    //Şifre Bitiş
+
+                                    //Şifremi unuttum başlangıç
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 40.0,
+                                          ),
+                                          child: Text(
+                                            "Şifremi unuttum",
+                                            style: TextStyle(
+                                              color: Colors.deepOrange,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    //Şifremi unuttum bitiş
+
+                                    //Giriş Yap Butonu Başlangıç
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 40.0,
+                                        vertical: 10,
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          bool kontrolSonuc =
+                                              formkey.currentState!.validate();
+                                          if (kontrolSonuc) {
+                                            String ePosta = tfEposta.text;
+                                            String sifre = tfSifre.text;
+
+                                            print(
+                                              "Kullanıcı adı: $ePosta - Şifre: $sifre",
+                                            );
+
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => Bottomnavbar(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 100.0,
+                                            vertical: 20,
+                                          ),
+                                          child: Text(
+                                            "Giriş Yap",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.deepOrange,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              7,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    //Giriş Yap butonu bitiş
+
+                                    //Telefon numarası ile giriş başlangıç
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 40.0,
+                                        vertical: 10,
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.phone_outlined),
+                                            Text(
+                                              "Telefon numarası ile giriş yap ",
+                                            ),
+                                          ],
+                                        ),
+
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          foregroundColor: Colors.black87,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              5,
+                                            ),
+                                            side: BorderSide(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              //Üye ol
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Form(
+                                    key: formKeySecond,
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0,
+                                            vertical: 20,
+                                          ),
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText:
+                                                  "E-posta adresi veya GSM numarası",
+                                              hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                              fillColor: Colors.grey.shade200,
+                                              filled: true,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey.shade200,
+                                                ),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey.shade200,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 20.0,
+                                                    ),
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          vertical: 15.0,
+                                                        ),
+                                                    child: Text(
+                                                      "Devam Et",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.deepOrange,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            5,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0,
+                                            vertical: 40,
+                                          ),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: "Kişisel verileriniz, ",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: "Aydınlatma Metni ",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      "kapsamında işlenmektedir. “Devam et” veya “Sosyal Hesap” butonlarından birine basarak ",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      "Üyelik Sözleşmesi’ni ve Gizlilik Politikası’nı",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      " okuduğunuzu ve kabul ettiğinizi onaylıyorsunuz.",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        //Telefon numarası ile giriş bitiş
+                      ],
+                    ),
+                  ),
+                ),
+
+                //Kayıt işlemleri bitiş
+
+                //Sosyal medya hesapları başlangıç
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Container(
+                    width: 400,
+                    height: 100,
+
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromARGB(255, 228, 236, 228),
+                    ),
+
+                    child: Column(
+                      children: [
+                        //Sosyal hesabın ile giriş yap yazısı başlangıç
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40.0,
-                                vertical: 10,
-                              ),
-                              child: TextFormField(
-                                controller: tfEposta,
-                                cursorColor: Colors.black,
-                                decoration: InputDecoration(
-                                  label: Text("E-posta adresi"),
-                                  labelStyle: TextStyle(color: Colors.grey),
-                                  filled: true,
-                                  fillColor: Colors.grey.shade100,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.deepOrange,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade100,
-                                      width: 0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade100,
-                                    ),
-                                  ),
-                                  focusColor: Colors.grey,
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Sosyal hesabın ile giriş yap",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
                                 ),
-
-                                validator: (tfEposta) {
-                                  if (tfEposta!.isEmpty) {
-                                    return 'Lütfen e-posta adresinizi giriniz';
-                                  }
-                                  if (!tfEposta.contains("@")) {
-                                    return "Lütfen e postanızı doğru giriniz";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-
-                            //E posta bitiş
-
-                            //Şifre Başlangıç
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40.0,
-                                vertical: 10,
-                              ),
-                              child: TextFormField(
-                                controller: tfSifre,
-
-                                cursorColor: Colors.black,
-                                obscureText: obscureText,
-
-                                decoration: InputDecoration(
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        obscureText = !obscureText;
-                                      });
-                                    },
-                                    child: Icon(
-                                      obscureText
-                                          ? Icons.remove_red_eye_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: Colors.grey.shade500,
-                                    ),
-                                  ),
-                                  label: Text("Şifre"),
-                                  labelStyle: TextStyle(color: Colors.grey),
-                                  filled: true,
-                                  fillColor: Colors.grey.shade100,
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.deepOrange,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade100,
-                                      width: 0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade100,
-                                    ),
-                                  ),
-                                ),
-
-                                validator: (tfSifre) {
-                                  if (tfSifre!.isEmpty) {
-                                    return "Şifre boş bırakılamaz";
-                                  }
-                                  if (tfSifre.length < 6) {
-                                    return "Şifre en az 6 karakterli olmalı";
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      //E posta başlangıç
 
-                      //Şifre Bitiş
-
-                      //Şifremi unuttum başlangıç
-                      TextButton(
-                        onPressed: () {},
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40.0,
-                            ),
-                            child: Text(
-                              "Şifremi unuttum",
-                              style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontWeight: FontWeight.bold,
+                        //Sosyal hesabın ile giriş yap yazısı bitiş
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //Apple Icon başlangıç
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5.0,
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      //Şifremi unuttum bitiş
-
-                      //Giriş Yap Butonu Başlangıç
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40.0,
-                          vertical: 10,
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            bool kontrolSonuc =
-                                formkey.currentState!.validate();
-                            if (kontrolSonuc) {
-                              String ePosta = tfEposta.text;
-                              String sifre = tfSifre.text;
-
-                              print("Kullanıcı adı: $ePosta - Şifre: $sifre");
-
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Bottomnavbar(),
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: Colors.grey),
                                 ),
-                              );
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 100.0,
-                              vertical: 20,
-                            ),
-                            child: Text(
-                              "Giriş Yap",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                child: Icon(Icons.apple),
                               ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepOrange,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7),
+                            //Apple Icon bitiş
+
+                            //Google Icon Başlangıç
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5.0,
+                              ),
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: Align(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.google,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                            //Google Icon bitiş
 
-                      //Giriş Yap butonu bitiş
-
-                      //Telefon numarası ile giriş başlangıç
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40.0,
-                          vertical: 10,
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.phone_outlined),
-                              Text("Telefon numarası ile giriş yap "),
-                            ],
-                          ),
-
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black87,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: BorderSide(color: Colors.grey),
+                            //Facebook Icon başlangıç
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5.0,
+                              ),
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: Align(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.facebook,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            //FAcebook Icon bitiş
+                          ],
                         ),
-                      ),
-
-                      //Telefon numarası ile giriş bitiş
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              //Kayıt işlemleri bitiş
-
-              //Sosyal medya hesapları başlangıç
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Container(
-                  width: 400,
-                  height: 100,
-
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 228, 236, 228),
-                  ),
-
-                  child: Column(
-                    children: [
-                      //Sosyal hesabın ile giriş yap yazısı başlangıç
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Text(
-                              "Sosyal hesabın ile giriş yap",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      //Sosyal hesabın ile giriş yap yazısı bitiş
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          //Apple Icon başlangıç
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5.0,
-                            ),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: Icon(Icons.apple),
-                            ),
-                          ),
-                          //Apple Icon bitiş
-
-                          //Google Icon Başlangıç
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5.0,
-                            ),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: Align(
-                                child: FaIcon(
-                                  FontAwesomeIcons.google,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ),
-                          //Google Icon bitiş
-
-                          //Facebook Icon başlangıç
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5.0,
-                            ),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: Align(
-                                child: FaIcon(
-                                  FontAwesomeIcons.facebook,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ),
-                          ),
-                          //FAcebook Icon bitiş
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              //Sosyal medya hesapları bitiş
-            ],
+                //Sosyal medya hesapları bitiş
+              ],
+            ),
           ),
         ),
       ),

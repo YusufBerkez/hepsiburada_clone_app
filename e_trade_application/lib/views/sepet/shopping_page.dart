@@ -514,6 +514,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 height: MediaQuery.of(context).size.height * 0.45,
                 color: Colors.white,
                 child: Padding(
+                  
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
