@@ -1,3 +1,4 @@
+import 'package:e_trade_application/data/datahelper.dart';
 import 'package:e_trade_application/models/cards_information.dart';
 import 'package:e_trade_application/views/detailspage/details_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class HomePageCard extends StatefulWidget {
     required this.card,
     required this.isVisible,
     required this.visibility,
-    required this.isPhone
+    required this.isPhone,
   });
 
   @override
@@ -220,23 +221,39 @@ class _HomePageCardState extends State<HomePageCard> {
                 ),
               ),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.038,
-                  color: Colors.grey.shade300,
-                  child: Row(
-                    children: [
-                      Text(
-                        "${widget.card.price.toInt().toString()} TL",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+              GestureDetector(
+                onTap: () {
+                  //önce isminin bulunduğu indexi buldum
+                  final index = cardss.indexWhere(
+                    (item) => item.name == widget.card.name,
+                  );
+                  
+                  //sonra burda da varsa sayısını arttırdım yoksa listeye ekledim
+                  if (index != -1) {
+                    cardss[index].count++;
+                  } else {
+                    cardss.add(widget.card);
+                  }
+                  setState(() {});
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.038,
+                    color: Colors.grey.shade300,
+                    child: Row(
+                      children: [
+                        Text(
+                          "${widget.card.price.toInt().toString()} TL",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                      Spacer(),
-                      Icon(Icons.add_shopping_cart_outlined),
-                    ],
+                        Spacer(),
+                        Icon(Icons.add_shopping_cart_outlined),
+                      ],
+                    ),
                   ),
                 ),
               ),

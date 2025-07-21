@@ -4,6 +4,7 @@ class CardsInformation {
   final String description;
   final double price;
   final bool isPhone;
+   int count;
 
   CardsInformation({
     required this.name,
@@ -11,5 +12,7 @@ class CardsInformation {
     required this.price,
     required this.imageUrl,
     this.isPhone =false,
+    this.count=1,
+    
   });
 }
